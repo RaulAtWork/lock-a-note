@@ -1,2 +1,3 @@
-# lock-a-note
-Totally not a milanote clone 
+# LOCK A NOTE
+
+Totally not a Milanote clone
