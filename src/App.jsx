@@ -1,11 +1,16 @@
-
+import Canvas from "./components/Canvas";
+import Header from "./components/Header";
+import SideMenu from "./components/SideMenu";
 
 function App() {
-
-
   return (
-    <h1>Welcome to Lock a Note</h1>
-  )
+    <>
+
+      <Header />
+      <SideMenu />
+      <Canvas/>
+    </>
+  );
 }
 
-export default App
+export default App;

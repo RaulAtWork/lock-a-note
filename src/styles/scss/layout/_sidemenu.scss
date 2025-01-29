@@ -1,0 +1,8 @@
+.side-menu{
+    position: absolute;
+    left: var(--separation-xl);
+    top: calc(var(--header-height) + var(--separation-xl));
+
+    background: black;
+    padding: var(--separation-m);
+}

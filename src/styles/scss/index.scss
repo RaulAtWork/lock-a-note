@@ -1,0 +1,12 @@
+/*IMPORT ALL PARTIALS*/
+
+/*abstracts*/
+@use 'abstracts/mixins';
+
+/*layout*/
+@use 'layout/header';
+@use 'layout/sidemenu';
+@use 'layout/canvas';
+
+/*components*/
+@use 'components/card';

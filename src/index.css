@@ -1,0 +1,23 @@
+@import "./styles/reset.css";
+@import "./styles/CSS/index.css";
+
+:root {
+  --separation-xxs: 4px;
+  --separation-xs: 8px;
+  --separation-s: 12px;
+  --separation-m: 16px;
+  --separation-l: 24px;
+  --separation-xl: 32px;
+  --separation-xxl: 48px;
+
+  --header-height: 64px;
+}
+
+body {
+  color: white;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
