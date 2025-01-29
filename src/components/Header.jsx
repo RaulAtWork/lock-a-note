@@ -1,5 +1,5 @@
 function Header() {
-  return <header>This is the header app</header>;
+  return <header><h1>Lock-a-Note</h1></header>;
 }
 
 export default Header;

@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+
+  background-color: var(--dark-shade-900);
+  border: 2px solid var(--dark-shade-900);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.card-title {
+  padding: var(--separation-s);
+}
+
+.card-content {
+  padding: var(--separation-s);
+  background-color: var(--dark-shade-800);
+}

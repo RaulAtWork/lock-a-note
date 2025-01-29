@@ -11,6 +11,16 @@
   --separation-xxl: 48px;
 
   --header-height: 64px;
+
+  --dark-shade-900: hsl(214, 22%, 16%);
+  --dark-shade-800: hsl(214, 16%, 28%);
+  --dark-shade-700: hsl(214, 11%, 48%);
+  --dark-shade-600: hsl(214, 16%, 63%);
+  --dark-shade-500: hsl(214, 23%, 74%);
+  --dark-shade-400: hsl(214, 17%, 82%);
+  --dark-shade-300: hsl(214, 23%, 88%);
+  --dark-shade-200: hsl(214, 22%, 90%);
+  --dark-shade-100: hsl(214, 16%, 97%);
 }
 
 body {
