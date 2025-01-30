@@ -2,26 +2,30 @@ import { useDraggable } from "@dnd-kit/core";
 import { useState } from "react";
 
 import Collapsible from "./Collapsible";
+import { useCanvasContext } from "../context/CanvasContext";
 
 const CARD_TYPE = {
-    TEXT
+    TEXT: "text"
 }
 
 function Card({ title, body, type }) {
   // State to manage the card's position
   const [position, setPosition] = useState({ x: 200, y: 300 });
+  const {zoom} = useCanvasContext()
 
   // Give draggable behavior
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: "draggable",
+    
   });
 
   // Calculate the style by combining the current position and the drag offset
   const style = {
-    transform: `translate3d(${(transform?.x || 0) + position.x}px, ${
-      (transform?.y || 0) + position.y
+    transform: `translate3d(${((transform?.x || 0) + position.x) / zoom}px, ${
+      ((transform?.y || 0) + position.y) / zoom
     }px, 0)`,
   };
+  
 
   // Handle the drag end event to update the position
   const handleDragEnd = () => {
@@ -41,6 +45,7 @@ function Card({ title, body, type }) {
       {...listeners}
       {...attributes}
       onPointerUp={handleDragEnd} // Update position when drag ends
+      onMouseDown={(e) => e.stopPropagation()}
     >
       <Collapsible title={title} titleStyle="card-title">
         <p className="card-content">{body}</p>

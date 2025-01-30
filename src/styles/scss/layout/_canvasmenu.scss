@@ -1,0 +1,16 @@
+@use "../abstracts/mixins";
+
+.canvas-menu {
+  @include mixins.top-menu;
+  bottom: var(--separation-xl);
+  right: var(--separation-xl);
+  display: flex;
+  flex-direction: row;
+  gap: var(--separation-m)
+}
+
+.canvas-menu > ul {
+    display: flex;
+    flex-direction: row;
+    gap: var(--separation-xs)
+}

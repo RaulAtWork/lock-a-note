@@ -13,25 +13,47 @@ header {
   background: rgba(0, 0, 0, 0.8);
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
-  z-index: 10; /*Always on top to apply the blur */
+  z-index: 99; /*Always on top to apply the blur */
 }
 
 .side-menu {
+  background: black;
+  padding: var(--separation-m);
+  z-index: 99; /*Always on top*/
   position: absolute;
   left: var(--separation-xl);
   top: calc(var(--header-height) + var(--separation-xl));
-  background: black;
-  padding: var(--separation-m);
 }
 
 .canvas-container {
-  min-width: 100vw;
-  min-height: 100vh;
+  min-width: 300vw;
+  min-height: 300vh;
   /*Generated from https://www.magicpattern.design/tools/css-backgrounds*/
   background-color: #0d0d0d;
   opacity: 1;
   background-image: radial-gradient(#a5a5a5 0.5px, #0d0d0d 0.5px);
   background-size: 10px 10px;
+  position: relative;
+  overflow: hidden;
+  transform-origin: top left;
+}
+
+.canvas-menu {
+  background: black;
+  padding: var(--separation-m);
+  z-index: 99; /*Always on top*/
+  position: absolute;
+  bottom: var(--separation-xl);
+  right: var(--separation-xl);
+  display: flex;
+  flex-direction: row;
+  gap: var(--separation-m);
+}
+
+.canvas-menu > ul {
+  display: flex;
+  flex-direction: row;
+  gap: var(--separation-xs);
 }
 
 /*components*/
@@ -40,6 +62,7 @@ header {
   flex-direction: column;
   width: -moz-fit-content;
   width: fit-content;
+  position: fixed;
   background-color: var(--dark-shade-900);
   border: 2px solid var(--dark-shade-900);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);

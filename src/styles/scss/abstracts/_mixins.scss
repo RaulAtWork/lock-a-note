@@ -1,0 +1,6 @@
+@mixin top-menu{
+    background: black;
+    padding: var(--separation-m);
+    z-index: 99;/*Always on top*/
+    position: absolute;
+}
