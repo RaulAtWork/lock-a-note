@@ -8,6 +8,9 @@
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  &:focus{
+    outline: solid;
+  }
 }
 
 .card-title {
@@ -17,4 +20,12 @@
 .card-content {
   padding: var(--separation-s);
   background-color: var(--dark-shade-800);
+}
+
+.draggable{
+  cursor: grab;
+}
+
+.draggable[aria-pressed="true"]{
+  cursor: grabbing;
 }

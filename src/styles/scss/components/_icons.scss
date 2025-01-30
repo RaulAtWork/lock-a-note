@@ -1,0 +1,16 @@
+%icon {
+  width: 20px;
+  height: 20px;
+  &.clickable {
+    cursor: pointer;
+  }
+}
+
+.icon {
+  @extend %icon;
+}
+
+.icon-secondary {
+  @extend %icon;
+  color: var(--dark-shade-700);
+}

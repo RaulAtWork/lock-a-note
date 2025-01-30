@@ -46,6 +46,9 @@ header {
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
+.card:focus {
+  outline: solid;
+}
 
 .card-title {
   padding: var(--separation-s);
@@ -54,4 +57,24 @@ header {
 .card-content {
   padding: var(--separation-s);
   background-color: var(--dark-shade-800);
+}
+
+.draggable {
+  cursor: grab;
+}
+
+.draggable[aria-pressed=true] {
+  cursor: grabbing;
+}
+
+.icon-secondary, .icon {
+  width: 20px;
+  height: 20px;
+}
+.clickable.icon-secondary, .clickable.icon {
+  cursor: pointer;
+}
+
+.icon-secondary {
+  color: var(--dark-shade-700);
 }
