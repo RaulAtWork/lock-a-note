@@ -13,6 +13,7 @@
   &:focus {
     outline: solid;
   }
+
 }
 
 .card-title {
@@ -43,13 +44,14 @@
   top: -30px;
   right: var(--separation-s);
 
-  transform: translateY(10px); /* Slightly offset upwards */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
-
+  transform: translateY(30px); /* Slightly offset upwards */
+  transition: opacity 0.4s ease, transform 0.3s ease; /* Smooth transition */
+  
+  
   background: var(--dark-shade-900);
   border-radius: 5px 5px 0 0;
   padding: 0 var(--separation-s);
-
+  
 }
 
 .card:focus .contextual-menu {

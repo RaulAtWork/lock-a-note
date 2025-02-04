@@ -10,8 +10,10 @@ class CustomPointerSensor extends PointerSensor {
           event.button !== 0 ||
           isInteractiveElement(event.target)
         ) {
+          //console.log("NOT interactive", event.target)
           return false;
         }
+        //console.log("YES interactive", event.target)
         return true;
       },
     },

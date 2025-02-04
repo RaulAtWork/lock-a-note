@@ -13,7 +13,9 @@ const CARD_TYPE = {
 function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
   // State to manage the card's position
   const [position, setPosition] = useState(initialPosition);
-  const { zoom, removeCardFromCanvas, updateCardTitle, udpateCardBody } = useCanvasContext();
+  const [isFocused, setIsFocused] = useState(false);
+  const { zoom, removeCardFromCanvas, updateCardTitle, udpateCardBody } =
+    useCanvasContext();
 
   // Give draggable behavior
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -38,6 +40,7 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
   };
 
   function onDelete() {
+    console.log("Deletion on progress");
     removeCardFromCanvas(id);
   }
 
@@ -45,8 +48,17 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
     updateCardTitle(event?.target?.value, id);
   }
 
-  function updateBody(event){
+  function updateBody(event) {
     udpateCardBody(event?.target?.value, id);
+  }
+
+  function handleFocus() {
+    setIsFocused(true);
+  }
+
+  function handleBlur() {
+    // We need to put a little delay so the buttons can react when on focus
+    setIsFocused(false);
   }
 
   return (
@@ -59,10 +71,14 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
       onPointerUp={handleDragEnd} // Update position when drag ends
       onMouseDown={(e) => e.stopPropagation()}
       id={id}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
     >
-      <ContextualMenu onDelete={onDelete} />
+      <ContextualMenu onDelete={onDelete} isFocused={isFocused} />
       <Collapsible title={title} setTitle={updateTitle} titleStyle="card-title">
-        {type === CARD_TYPE.TEXT && <Card_Text body={body} setBody={updateBody}/>}
+        {type === CARD_TYPE.TEXT && (
+          <Card_Text body={body} setBody={updateBody} />
+        )}
       </Collapsible>
     </div>
   );
