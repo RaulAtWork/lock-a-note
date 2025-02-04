@@ -7,21 +7,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCanvasContext } from "../context/CanvasContext";
 
 function CanvasMenu() {
-    const {zoom, zoomIn, zoomOut, setNewCanvasPosition} = useCanvasContext()
-    let zoomFormated = (Math.round(zoom * 100) / 100).toFixed(2)
+  const { zoom, zoomIn, zoomOut, setNewCanvasPosition } = useCanvasContext();
+  let zoomFormated = (Math.round(zoom * 100) / 100).toFixed(2);
   return (
     <menu className="canvas-menu">
       <ul>
         <li>
-          <FontAwesomeIcon icon={faCircleDot} className="icon clickable" onClick={()=>{setNewCanvasPosition({x:0,y:0})}}/>
+          <button
+            onClick={() => {
+              setNewCanvasPosition({ x: 0, y: 0 });
+            }}
+          >
+            <FontAwesomeIcon icon={faCircleDot} className="icon clickable" />
+          </button>
         </li>
       </ul>
       <ul>
         <li>
-          <FontAwesomeIcon icon={faPlus} className="icon clickable" onClick={zoomIn} />
+          <button onClick={zoomIn}>
+            <FontAwesomeIcon icon={faPlus} className="icon clickable" />
+          </button>
         </li>
         <li>
-          <FontAwesomeIcon icon={faMinus} className="icon clickable" onClick={zoomOut} />
+          <button onClick={zoomOut}>
+            <FontAwesomeIcon icon={faMinus} className="icon clickable" />
+          </button>
         </li>
         <li>{zoomFormated}</li>
       </ul>

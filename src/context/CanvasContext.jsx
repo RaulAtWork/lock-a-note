@@ -53,9 +53,9 @@ export function CanvasProvider({ children }) {
     setCanvasPosition({ x: constrainedX, y: constrainedY });
   }
 
-  function addCardToCanvas({title, body, initialPosition = {x:300, y:300}}){
+  function addCardToCanvas({title, body, type, initialPosition = {x:300, y:300}}){
     let newID = uuidv4();
-    setCardList([...cardList, {title, body, initialPosition, id: newID}])
+    setCardList([...cardList, {title, body, initialPosition, type, id: newID}])
   }
 
 function removeCardFromCanvas(id){
@@ -64,9 +64,32 @@ function removeCardFromCanvas(id){
   setCardList(filteredCardList)
 }
 
+function updateCardTitle(newTitle, id){
+  const udpatedList = cardList.map((card)=>{
+    if(card.id === id){
+      card.title = newTitle
+    }
+    return card
+  })
+
+  setCardList(udpatedList)
+}
+
+function udpateCardBody(newBody, id){
+  const udpatedList = cardList.map((card)=>{
+    if(card.id === id){
+      card.body = newBody
+    }
+    return card
+  })
+
+  setCardList(udpatedList)
+
+}
+
   return (
     <CanvasContext.Provider
-      value={{ zoom, zoomIn, zoomOut, canvasPosition, setNewCanvasPosition, cardList, addCardToCanvas, removeCardFromCanvas }}
+      value={{ zoom, zoomIn, zoomOut, canvasPosition, setNewCanvasPosition, cardList, addCardToCanvas, removeCardFromCanvas, updateCardTitle, udpateCardBody }}
     >
       {children}
     </CanvasContext.Provider>

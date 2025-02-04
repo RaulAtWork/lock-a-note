@@ -1,7 +1,11 @@
 /*IMPORT ALL PARTIALS*/
 
+
 /*abstracts*/
 @use 'abstracts/mixins';
+
+/*base*/
+@use 'base/input';
 
 /*layout*/
 @use 'layout/header';

@@ -1,5 +1,10 @@
 /*IMPORT ALL PARTIALS*/
 /*abstracts*/
+/*base*/
+button {
+  cursor: pointer;
+}
+
 /*layout*/
 header {
   border-bottom: 1px solid var(--color-neutral-500);
@@ -78,6 +83,7 @@ header {
 }
 
 .card-content {
+  width: 100%;
   padding: var(--separation-s);
   background-color: var(--dark-shade-800);
 }
@@ -96,10 +102,13 @@ header {
   flex-direction: row;
   justify-content: end;
   position: absolute;
-  top: calc(var(--separation-xl) * -1);
+  top: -30px;
   right: var(--separation-s);
-  transform: translateY(-10px); /* Slightly offset upwards */
+  transform: translateY(10px); /* Slightly offset upwards */
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  background: var(--dark-shade-900);
+  border-radius: 5px 5px 0 0;
+  padding: 0 var(--separation-s);
 }
 
 .card:focus .contextual-menu {
@@ -113,16 +122,13 @@ header {
   gap: var(--separation-s);
 }
 
-.contextual-menu-actions > li {
+.contextual-menu-actions button {
   cursor: pointer;
 }
 
 .icon-secondary, .icon-l, .icon {
   width: 20px;
   height: 20px;
-}
-.clickable.icon-secondary, .clickable.icon-l, .clickable.icon {
-  cursor: pointer;
 }
 
 .icon-l {

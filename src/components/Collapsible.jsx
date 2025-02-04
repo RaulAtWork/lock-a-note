@@ -5,7 +5,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Collapsible({ title, titleStyle, open = true, children }) {
+function Collapsible({ title, setTitle, titleStyle, open = true, children }) {
   const [isOpen, setIsOpen] = useState(open);
 
   function toggleOpen() {
@@ -16,22 +16,24 @@ function Collapsible({ title, titleStyle, open = true, children }) {
     <div className="collapsible">
       <h2 className={titleStyle}>
         {!isOpen && (
-          <FontAwesomeIcon
-            icon={faChevronRight}
-            className="icon clickable"
-            onClick={toggleOpen}
-            onPointerDown={(e) => e.stopPropagation()}
-          />
+          <button onClick={toggleOpen}>
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className="icon"
+              style={{ pointerEvents: "none" }}
+            />
+          </button>
         )}
         {isOpen && (
-          <FontAwesomeIcon
-            icon={faChevronDown}
-            className="icon-secondary clickable"
-            onClick={toggleOpen}
-            onPointerDown={(e) => e.stopPropagation()}
-          />
+          <button onClick={toggleOpen}>
+            <FontAwesomeIcon
+              icon={faChevronDown}
+              className="icon-secondary"
+              style={{ pointerEvents: "none" }}
+            />
+          </button>
         )}
-        {" "}{title}
+        <input type="text" value={title} onChange={setTitle} placeholder="Title"/>
       </h2>
       {isOpen && children}
     </div>
