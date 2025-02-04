@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { DndContext } from "@dnd-kit/core";
 import { CanvasProvider } from "./context/CanvasContext.jsx";
+import { restrictToParentElement, restrictToWindowEdges } from "@dnd-kit/modifiers";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

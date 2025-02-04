@@ -10,6 +10,12 @@
   @extend %icon;
 }
 
+.icon-l{
+  @extend %icon ;
+  width: 40px;
+  height: 40px
+}
+
 .icon-secondary {
   @extend %icon;
   color: var(--dark-shade-700);

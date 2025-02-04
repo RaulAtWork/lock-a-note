@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 // Create the ZoomContext
 const CanvasContext = createContext();
@@ -8,6 +9,7 @@ const ZOOM_STEP = 0.1;
 export function CanvasProvider({ children }) {
   const [zoom, setZoom] = useState(1); // Default zoom level is 1 (100%)
   const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
+  const [cardList, setCardList] = useState([])
 
   // Function to zoom in
   const zoomIn = () => applyZoom(+ZOOM_STEP);
@@ -51,9 +53,20 @@ export function CanvasProvider({ children }) {
     setCanvasPosition({ x: constrainedX, y: constrainedY });
   }
 
+  function addCardToCanvas({title, body, initialPosition = {x:300, y:300}}){
+    let newID = uuidv4();
+    setCardList([...cardList, {title, body, initialPosition, id: newID}])
+  }
+
+function removeCardFromCanvas(id){
+  const filteredCardList = cardList.filter((card)=> card.id !== id)
+  //console.log(id, filteredCardList)
+  setCardList(filteredCardList)
+}
+
   return (
     <CanvasContext.Provider
-      value={{ zoom, zoomIn, zoomOut, canvasPosition, setNewCanvasPosition }}
+      value={{ zoom, zoomIn, zoomOut, canvasPosition, setNewCanvasPosition, cardList, addCardToCanvas, removeCardFromCanvas }}
     >
       {children}
     </CanvasContext.Provider>

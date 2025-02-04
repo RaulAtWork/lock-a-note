@@ -90,12 +90,44 @@ header {
   cursor: grabbing;
 }
 
-.icon-secondary, .icon {
+.contextual-menu {
+  display: flex;
+  opacity: 0;
+  flex-direction: row;
+  justify-content: end;
+  position: absolute;
+  top: calc(var(--separation-xl) * -1);
+  right: var(--separation-s);
+  transform: translateY(-10px); /* Slightly offset upwards */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.card:focus .contextual-menu {
+  opacity: 1;
+  transform: translateY(0); /* Slide into place */
+}
+
+.contextual-menu-actions {
+  display: flex;
+  flex-direction: row;
+  gap: var(--separation-s);
+}
+
+.contextual-menu-actions > li {
+  cursor: pointer;
+}
+
+.icon-secondary, .icon-l, .icon {
   width: 20px;
   height: 20px;
 }
-.clickable.icon-secondary, .clickable.icon {
+.clickable.icon-secondary, .clickable.icon-l, .clickable.icon {
   cursor: pointer;
+}
+
+.icon-l {
+  width: 40px;
+  height: 40px;
 }
 
 .icon-secondary {
