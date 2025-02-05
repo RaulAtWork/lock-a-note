@@ -65,8 +65,7 @@ header {
 .card {
   display: flex;
   flex-direction: column;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 300px;
   position: fixed;
   background-color: var(--dark-shade-900);
   border: 2px solid var(--dark-shade-900);
@@ -138,4 +137,13 @@ header {
 
 .icon-secondary {
   color: var(--dark-shade-700);
+}
+
+.link-preview {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-preview-title, .link-preview-description {
+  padding: var(--separation-m);
 }

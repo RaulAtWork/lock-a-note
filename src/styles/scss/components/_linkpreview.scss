@@ -1,0 +1,8 @@
+.link-preview{
+    display: flex;
+    flex-direction: column;
+}
+
+.link-preview-title , .link-preview-description{
+    padding: var(--separation-m);
+}

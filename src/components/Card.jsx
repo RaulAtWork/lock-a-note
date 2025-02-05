@@ -5,9 +5,11 @@ import Collapsible from "./Collapsible";
 import { useCanvasContext } from "../context/CanvasContext";
 import Card_Text from "./CardTypes/Card_Text";
 import { ContextualMenu } from "./ContextualMenu";
+import Card_Link from "./CardTypes/Card_Link";
 
 const CARD_TYPE = {
   TEXT: "text",
+  LINK: "link",
 };
 
 function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
@@ -75,11 +77,21 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
       onBlur={handleBlur}
     >
       <ContextualMenu onDelete={onDelete} isFocused={isFocused} />
-      <Collapsible title={title} setTitle={updateTitle} titleStyle="card-title">
-        {type === CARD_TYPE.TEXT && (
-          <Card_Text body={body} setBody={updateBody} />
-        )}
-      </Collapsible>
+      {type !== CARD_TYPE.LINK && (
+        <Collapsible
+          title={title}
+          setTitle={updateTitle}
+          titleStyle="card-title"
+        >
+          {type === CARD_TYPE.TEXT && (
+            <Card_Text body={body} setBody={updateBody} />
+          )}
+        </Collapsible>
+      )}
+
+      {type === CARD_TYPE.LINK && (
+        <Card_Link body={body} setBody={updateBody} />
+      )}
     </div>
   );
 }
