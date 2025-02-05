@@ -1,4 +1,4 @@
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faArrowsUpDownLeftRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ContextualMenu({ onDelete, isFocused }) {
@@ -12,6 +12,12 @@ export function ContextualMenu({ onDelete, isFocused }) {
             onPointerDown={(e) => e.stopPropagation()}
           />
         </li>*/}
+        <li>
+          <button title="Move the card">
+          <FontAwesomeIcon icon={faArrowsUpDownLeftRight} />
+
+          </button>
+        </li>
         <li>
           <button onClick={onDelete}>
             <FontAwesomeIcon

@@ -16,6 +16,8 @@
 }
 
 .card-title {
+  display: flex;
+  flex-direction: row;
   padding: var(--separation-s);
 }
 
