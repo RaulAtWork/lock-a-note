@@ -1,12 +1,9 @@
-import { faPen, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function ContextualMenu({ onDelete, isFocused }) {
   return (
-    <div
-      className="contextual-menu"
-      style={isFocused ? { pointerEvents: "all"} : { pointerEvents: "none" }}
-    >
+    <div className="contextual-menu">
       <ul className="contextual-menu-actions">
         {/*<li>
           <FontAwesomeIcon

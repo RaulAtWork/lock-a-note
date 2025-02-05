@@ -74,7 +74,7 @@ header {
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
-.card:focus {
+.card:focus-within {
   outline: solid;
 }
 
@@ -104,16 +104,16 @@ header {
   position: absolute;
   top: -30px;
   right: var(--separation-s);
-  transform: translateY(30px); /* Slightly offset upwards */
-  transition: opacity 0.4s ease, transform 0.3s ease; /* Smooth transition */
+  transition: opacity 0.4s ease; /* Smooth transition */
   background: var(--dark-shade-900);
   border-radius: 5px 5px 0 0;
   padding: 0 var(--separation-s);
+  pointer-events: none;
 }
 
-.card:focus .contextual-menu {
+.card:focus-within .contextual-menu, .contextual-menu:focus {
   opacity: 1;
-  transform: translateY(0); /* Slide into place */
+  pointer-events: all;
 }
 
 .contextual-menu-actions {
