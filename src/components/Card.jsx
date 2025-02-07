@@ -48,7 +48,6 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
   };
 
   function onDelete() {
-    console.log("Deletion on progress");
     removeCardFromCanvas(id);
   }
 

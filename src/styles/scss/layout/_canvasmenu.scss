@@ -14,3 +14,12 @@
     flex-direction: row;
     gap: var(--separation-xs)
 }
+
+.zoom-display {
+	width: 5ch;
+	/* margin-left: auto; */
+	display: flex;
+	flex-direction: row;
+	/* align-items: baseline; */
+	justify-content: end;
+}

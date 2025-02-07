@@ -8,7 +8,7 @@ import { useCanvasContext } from "../context/CanvasContext";
 
 function CanvasMenu() {
   const { zoom, zoomIn, zoomOut, setNewCanvasPosition } = useCanvasContext();
-  let zoomFormated = (Math.round(zoom * 100)).toFixed(0) + "%";
+  let zoomFormated = Math.round(zoom * 100).toFixed(0) + "%";
   return (
     <menu className="canvas-menu">
       <ul>
@@ -28,7 +28,9 @@ function CanvasMenu() {
             <FontAwesomeIcon icon={faPlus} className="icon clickable" />
           </button>
         </li>
-        <li>{zoomFormated}</li>
+        <li className="zoom-display">
+          <span>{zoomFormated}</span>
+        </li>
         <li>
           <button onClick={zoomOut}>
             <FontAwesomeIcon icon={faMinus} className="icon clickable" />
