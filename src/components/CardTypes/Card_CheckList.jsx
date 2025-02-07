@@ -11,7 +11,7 @@ function Card_CheckList({ body, setBody }) {
     const observerCallback = (mutationsList) => {
       for (const mutation of mutationsList) {
         if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
-          console.log("New child added:", mutation.addedNodes[0]); // Log the new child
+          //console.log("New child added:", mutation.addedNodes[0]); // Log the new child
           // Get the newly added node
           const newChild = mutation.addedNodes[0];
           // Find the input[type="text"] inside the new child and focus it
@@ -75,6 +75,16 @@ function Card_CheckList({ body, setBody }) {
 
       setBody(newBody);
     }
+    if (event?.key === "Backspace" && !body[currentIndex].task && body.length > 1) {
+      const newBody = body;
+      newBody.splice(currentIndex, 1);
+      // we need to set hte new state after the new focus to prevent race conditions
+      // focus the previous element
+      const liElements = ulRef.current.querySelectorAll('li input[type="text"]');
+      const newFocusIndex = currentIndex === 0 ? 1 : currentIndex - 1;
+      liElements[newFocusIndex].focus();
+      setBody(newBody);
+    }
   }
 
   return (
@@ -94,7 +104,7 @@ function Card_CheckList({ body, setBody }) {
             value={checkItem.task}
             onChange={(event) => onInputText(checkItem.id, event)}
             placeholder="Enter your task"
-            onKeyDown={(event)=> handleOnKeyDown(event, index)}
+            onKeyDown={(event) => handleOnKeyDown(event, index)}
           />
         </li>
       ))}
