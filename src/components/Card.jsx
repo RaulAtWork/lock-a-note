@@ -55,8 +55,8 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
     updateCardTitle(event?.target?.value, id);
   }
 
-  function updateBody(event) {
-    udpateCardBody(event?.target?.value, id);
+  function updateBody(newBody) {
+    udpateCardBody(newBody, id);
   }
 
   function handleFocus() {

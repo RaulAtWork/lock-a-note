@@ -1,8 +1,13 @@
-.link-preview{
-    display: flex;
-    flex-direction: column;
+.link-preview {
+  display: flex;
+  flex-direction: column;
 }
 
-.link-preview-title , .link-preview-description{
-    padding: var(--separation-m);
+.link-preview-title,
+.link-preview-description {
+  padding: var(--separation-m);
+}
+
+.link-preview-description {
+  color: var(--dark-shade-700);
 }

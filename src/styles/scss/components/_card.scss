@@ -75,3 +75,23 @@
 .contextual-menu-actions button {
   cursor: pointer;
 }
+
+
+/*CARD CHECK LIST*/
+
+.check-list{
+  padding: var(--separation-s);
+}
+
+.check-list .check-task {
+  display: flex;
+  flex-direction: row;
+  gap: 10px
+
+}
+
+.check-task.completed > input[type="text"]{
+  text-decoration: line-through;
+  color: var(--dark-shade-600)
+}
+

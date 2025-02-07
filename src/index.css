@@ -41,3 +41,8 @@ html, body {
 textarea{
   resize: none;
 }
+
+input[type="checkbox"]{
+  cursor: pointer;
+  accent-color: var(--dark-shade-600);
+}

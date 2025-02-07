@@ -22,6 +22,10 @@ function Card_Link({ body, setBody }) {
     }
   }
 
+  function onChange(event){
+    setBody(event.target.value)
+  }
+
   return (
     <>
       {link && <LinkPreview url={link} />}
@@ -29,7 +33,7 @@ function Card_Link({ body, setBody }) {
         className="card-content"
         type="text"
         value={body}
-        onChange={setBody}
+        onChange={onChange}
         placeholder="Enter link"
         onKeyDown={handleOnKeyDown}
       />

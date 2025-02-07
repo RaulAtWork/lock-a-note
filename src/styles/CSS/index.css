@@ -143,6 +143,22 @@ header {
   cursor: pointer;
 }
 
+/*CARD CHECK LIST*/
+.check-list {
+  padding: var(--separation-s);
+}
+
+.check-list .check-task {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.check-task.completed > input[type=text] {
+  text-decoration: line-through;
+  color: var(--dark-shade-600);
+}
+
 .icon-secondary, .icon-l, .icon {
   width: 20px;
   height: 20px;
@@ -162,6 +178,11 @@ header {
   flex-direction: column;
 }
 
-.link-preview-title, .link-preview-description {
+.link-preview-title,
+.link-preview-description {
   padding: var(--separation-m);
+}
+
+.link-preview-description {
+  color: var(--dark-shade-700);
 }
