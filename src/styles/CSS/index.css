@@ -73,6 +73,7 @@ header {
   flex-direction: column;
   width: 300px;
   position: fixed;
+  transform-origin: top left;
   background-color: var(--dark-shade-900);
   border: 2px solid var(--dark-shade-900);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);

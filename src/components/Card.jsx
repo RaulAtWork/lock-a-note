@@ -18,7 +18,7 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
   // State to manage the card's position
   const [position, setPosition] = useState(initialPosition);
   const [isFocused, setIsFocused] = useState(false);
-  const { zoom, removeCardFromCanvas, updateCardTitle, udpateCardBody } =
+  const { removeCardFromCanvas, updateCardTitle, udpateCardBody } =
     useCanvasContext();
 
   // Give draggable behavior
@@ -27,10 +27,14 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
   });
 
   // Calculate the style by combining the current position and the drag offset
-  const dragStyle = {
+  /*const dragStyle = {
     transform: `translate3d(${((transform?.x || 0) + position.x) / zoom}px, ${
       ((transform?.y || 0) + position.y) / zoom
     }px, 0)`,
+  };*/
+
+  const dragStyle = {
+    transform: `translate(${(transform?.x || 0) + position.x}px, ${(transform?.y || 0) + position.y}px) `,
   };
 
   // Handle the drag end event to update the position
