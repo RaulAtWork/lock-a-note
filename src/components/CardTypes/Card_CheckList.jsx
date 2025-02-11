@@ -1,3 +1,5 @@
+import { faX } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
@@ -75,16 +77,34 @@ function Card_CheckList({ body, setBody }) {
 
       setBody(newBody);
     }
-    if (event?.key === "Backspace" && !body[currentIndex].task && body.length > 1) {
-      const newBody = body;
-      newBody.splice(currentIndex, 1);
-      // we need to set hte new state after the new focus to prevent race conditions
-      // focus the previous element
-      const liElements = ulRef.current.querySelectorAll('li input[type="text"]');
-      const newFocusIndex = currentIndex === 0 ? 1 : currentIndex - 1;
-      liElements[newFocusIndex].focus();
-      setBody(newBody);
+    if (
+      event?.key === "Backspace" &&
+      !body[currentIndex].task &&
+      body.length > 1
+    ) {
+      deleteRow(currentIndex, () => {
+        // we need to set hte new state after the new focus to prevent race conditions
+        // focus the previous element
+        const liElements = ulRef.current.querySelectorAll(
+          'li input[type="text"]'
+        );
+        const newFocusIndex = index === 0 ? 1 : index - 1;
+        liElements[newFocusIndex].focus();
+      });
     }
+  }
+
+  function deleteRow(index, preSetAction = null) {
+    let newBody = body;
+    // prevent deleting the last element, we just clean it up
+    if (body.length <= 1) {
+      newBody = [{ id: uuidv4(), completed: false, task: "" }]
+    } else {
+      newBody.splice(index, 1);
+      if (preSetAction) preSetAction();
+    }
+
+    setBody(newBody);
   }
 
   return (
@@ -95,17 +115,25 @@ function Card_CheckList({ body, setBody }) {
           key={checkItem.id}
         >
           <input
+            className="check-task-checkbox"
             type="checkbox"
             checked={checkItem.completed ? true : false}
             onChange={(event) => onCheckbox(checkItem.id, event)}
           />{" "}
           <input
+            className="check-task-text"
             type="text"
             value={checkItem.task}
             onChange={(event) => onInputText(checkItem.id, event)}
             placeholder="Enter your task"
             onKeyDown={(event) => handleOnKeyDown(event, index)}
           />
+          <button
+            className="check-task-delete"
+            onClick={() => deleteRow(index)}
+          >
+            <FontAwesomeIcon icon={faX} style={{ pointerEvents: "none" }} />
+          </button>
         </li>
       ))}
     </ul>

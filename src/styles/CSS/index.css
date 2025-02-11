@@ -91,6 +91,7 @@ header {
 }
 .card:focus-within {
   outline: solid;
+  z-index: 10;
 }
 
 .card-title {
@@ -111,6 +112,7 @@ header {
 
 .draggable[aria-pressed=true] {
   cursor: grabbing;
+  z-index: 10;
 }
 
 .contextual-menu {
@@ -128,7 +130,8 @@ header {
   pointer-events: none;
 }
 
-.card:focus-within .contextual-menu, .contextual-menu:focus {
+.card:focus-within .contextual-menu,
+.contextual-menu:focus {
   opacity: 1;
   pointer-events: all;
 }
@@ -146,6 +149,9 @@ header {
 /*CARD CHECK LIST*/
 .check-list {
   padding: var(--separation-s);
+  gap: var(--separation-s);
+  display: flex;
+  flex-direction: column;
 }
 
 .check-list .check-task {
@@ -157,6 +163,23 @@ header {
 .check-task.completed > input[type=text] {
   text-decoration: line-through;
   color: var(--dark-shade-600);
+}
+
+.check-task-text {
+  flex: 1;
+}
+
+.check-task-delete {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease; /* Smooth transition */
+  color: var(--dark-shade-700);
+}
+
+.check-task:focus-within .check-task-delete,
+.check-task:hover .check-task-delete {
+  opacity: 1;
+  pointer-events: all;
 }
 
 .icon-secondary, .icon-l, .icon {

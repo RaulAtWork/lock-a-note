@@ -18,7 +18,7 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
   // State to manage the card's position
   const [position, setPosition] = useState(initialPosition);
   const [isFocused, setIsFocused] = useState(false);
-  const { removeCardFromCanvas, updateCardTitle, udpateCardBody } =
+  const { removeCardFromCanvas, updateCardTitle, udpateCardBody, updateCardPosition } =
     useCanvasContext();
 
   // Give draggable behavior
@@ -46,6 +46,10 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
       }));
     }
   };
+
+  useEffect(()=>{
+    updateCardPosition(position, id)
+  }, [position])
 
   function onDelete() {
     removeCardFromCanvas(id);

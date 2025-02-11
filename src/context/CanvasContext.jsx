@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 // Create the ZoomContext
 const CanvasContext = createContext();
@@ -9,7 +9,17 @@ const ZOOM_STEP = 0.1;
 export function CanvasProvider({ children }) {
   const [zoom, setZoom] = useState(1); // Default zoom level is 1 (100%)
   const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
-  const [cardList, setCardList] = useState([])
+  const [cardList, setCardList] = useState(() => {
+    var storedCardList = JSON.parse(localStorage.getItem("cardList"));
+    console.log(storedCardList);
+    return storedCardList ? storedCardList : [];
+  });
+
+  useEffect(() => {
+    //save data everytime a change is done on the card list
+    console.log("Called the storage system");
+    localStorage.setItem("cardList", JSON.stringify(cardList));
+  }, [cardList]);
 
   // Function to zoom in
   const zoomIn = () => applyZoom(+ZOOM_STEP);
@@ -53,43 +63,72 @@ export function CanvasProvider({ children }) {
     setCanvasPosition({ x: constrainedX, y: constrainedY });
   }
 
-  function addCardToCanvas({title, body, type, initialPosition = {x:300, y:300}}){
+  function addCardToCanvas({
+    title,
+    body,
+    type,
+    initialPosition = { x: 300, y: 300 },
+  }) {
     let newID = uuidv4();
-    setCardList([...cardList, {title, body, initialPosition, type, id: newID}])
+    setCardList([
+      ...cardList,
+      { title, body, initialPosition, type, id: newID },
+    ]);
   }
 
-function removeCardFromCanvas(id){
-  const filteredCardList = cardList.filter((card)=> card.id !== id)
-  //console.log(id, filteredCardList)
-  setCardList(filteredCardList)
-}
+  function removeCardFromCanvas(id) {
+    const filteredCardList = cardList.filter((card) => card.id !== id);
+    //console.log(id, filteredCardList)
+    setCardList(filteredCardList);
+  }
 
-function updateCardTitle(newTitle, id){
-  const udpatedList = cardList.map((card)=>{
-    if(card.id === id){
-      card.title = newTitle
-    }
-    return card
-  })
+  function updateCardTitle(newTitle, id) {
+    const udpatedList = cardList.map((card) => {
+      if (card.id === id) {
+        card.title = newTitle;
+      }
+      return card;
+    });
 
-  setCardList(udpatedList)
-}
+    setCardList(udpatedList);
+  }
 
-function udpateCardBody(newBody, id){
-  const udpatedList = cardList.map((card)=>{
-    if(card.id === id){
-      card.body = newBody
-    }
-    return card
-  })
+  function udpateCardBody(newBody, id) {
+    const udpatedList = cardList.map((card) => {
+      if (card.id === id) {
+        card.body = newBody;
+      }
+      return card;
+    });
 
-  setCardList(udpatedList)
+    setCardList(udpatedList);
+  }
+  function updateCardPosition(newPosition, id) {
+    const udpatedList = cardList.map((card) => {
+      if (card.id === id) {
+        card.initialPosition = newPosition;
+      }
+      return card;
+    });
 
-}
+    setCardList(udpatedList);
+  }
 
   return (
     <CanvasContext.Provider
-      value={{ zoom, zoomIn, zoomOut, canvasPosition, setNewCanvasPosition, cardList, addCardToCanvas, removeCardFromCanvas, updateCardTitle, udpateCardBody }}
+      value={{
+        zoom,
+        zoomIn,
+        zoomOut,
+        canvasPosition,
+        setNewCanvasPosition,
+        cardList,
+        addCardToCanvas,
+        removeCardFromCanvas,
+        updateCardPosition,
+        updateCardTitle,
+        udpateCardBody,
+      }}
     >
       {children}
     </CanvasContext.Provider>
