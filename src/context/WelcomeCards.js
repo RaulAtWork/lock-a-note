@@ -44,4 +44,11 @@ export const welcomeCards = [
     body: "https://www.google.com",
     initialPosition: { x: 500, y: 420 },
   },
+  {
+    id: "welcome_card_4",
+    type: CARD_TYPE.TEXT,
+    title: "In case you need...",
+    body: "to remember the instructions,click the button on the top menu",
+    initialPosition: { x: 500, y: 100 },
+  },
 ];
