@@ -11,3 +11,7 @@ header{
     backdrop-filter: blur(6px);
     z-index: 99; /*Always on top to apply the blur */
 }
+
+header h1{
+    color: var(--dark-shade-700);
+}

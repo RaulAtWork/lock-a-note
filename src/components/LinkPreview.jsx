@@ -1,3 +1,5 @@
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 const API_KEY = import.meta.env.VITE_JSONLINK_API_KEY;
 const STATE = { IDLE:"idle", LOADING:"loading", PREVIEW:"preview", ERROR:"error" };
@@ -39,7 +41,7 @@ function LinkPreview({ url }) {
           {previewData.images && (
             <img className="link-preview-image" src={previewData.images[0]} />
           )}
-          <h2 className="link-preview-title">{previewData.title}</h2>
+          <h2 className="link-preview-title"><a target="_blank" href={url}>{previewData.title} {" "}<FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a></h2>
           <p className="link-preview-description">{previewData.description}</p>
         </>
       )}

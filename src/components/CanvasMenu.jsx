@@ -17,6 +17,7 @@ function CanvasMenu() {
             onClick={() => {
               setNewCanvasPosition({ x: 0, y: 0 });
             }}
+            title="Go back to canvas start"
           >
             <FontAwesomeIcon icon={faCircleDot} className="icon clickable" />
           </button>
@@ -24,15 +25,15 @@ function CanvasMenu() {
       </ul>
       <ul>
         <li>
-          <button onClick={zoomIn}>
+          <button onClick={zoomIn} title="Zoom in">
             <FontAwesomeIcon icon={faPlus} className="icon clickable" />
           </button>
         </li>
         <li className="zoom-display">
-          <span>{zoomFormated}</span>
+          <span title="Current zoom level">{zoomFormated}</span>
         </li>
         <li>
-          <button onClick={zoomOut}>
+          <button onClick={zoomOut} title="Zoom out">
             <FontAwesomeIcon icon={faMinus} className="icon clickable" />
           </button>
         </li>

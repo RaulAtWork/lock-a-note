@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { welcomeCards } from "./WelcomeCards";
 
 // Create the ZoomContext
 const CanvasContext = createContext();
@@ -11,13 +12,11 @@ export function CanvasProvider({ children }) {
   const [canvasPosition, setCanvasPosition] = useState({ x: 0, y: 0 });
   const [cardList, setCardList] = useState(() => {
     var storedCardList = JSON.parse(localStorage.getItem("cardList"));
-    console.log(storedCardList);
-    return storedCardList ? storedCardList : [];
+    return storedCardList ? storedCardList : welcomeCards;
   });
 
   useEffect(() => {
     //save data everytime a change is done on the card list
-    console.log("Called the storage system");
     localStorage.setItem("cardList", JSON.stringify(cardList));
   }, [cardList]);
 

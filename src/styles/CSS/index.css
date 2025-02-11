@@ -21,6 +21,10 @@ header {
   z-index: 99; /*Always on top to apply the blur */
 }
 
+header h1 {
+  color: var(--dark-shade-700);
+}
+
 .side-menu {
   background: black;
   padding: var(--separation-m);
@@ -80,7 +84,7 @@ header {
 .card {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 320px;
   position: fixed;
   transform-origin: top left;
   background-color: var(--dark-shade-900);
