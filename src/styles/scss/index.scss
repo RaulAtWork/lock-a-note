@@ -6,6 +6,8 @@
 
 /*base*/
 @use 'base/input';
+@use 'base/lists';
+@use 'base/text';
 
 /*layout*/
 @use 'layout/header';
@@ -17,3 +19,4 @@
 @use 'components/card';
 @use 'components/icons';
 @use 'components/linkpreview';
+@use 'components/modal';
