@@ -1,7 +1,7 @@
 import { faArrowsUpDownLeftRight, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export function ContextualMenu({ onDelete, isFocused }) {
+export function ContextualMenu({ onDelete }) {
   return (
     <div className="contextual-menu">
       <ul className="contextual-menu-actions">

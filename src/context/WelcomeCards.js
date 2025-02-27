@@ -1,3 +1,4 @@
+import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 import { CARD_TYPE } from "../components/Card";
 //{ title, body, initialPosition, type, id},
 export const welcomeCards = [
@@ -7,6 +8,7 @@ export const welcomeCards = [
     title: "Welcome to Lock-a-Note",
     body: "An application to organize your ideas into Cards!!",
     initialPosition: { x: 150, y: 100 },
+    size: { width: 350, height: 200 },
   },
   {
     id: "welcome_card_2",
@@ -36,19 +38,22 @@ export const welcomeCards = [
         task: "Try the link button --------->",
       },
     ],
-    initialPosition: { x: 150, y: 250 },
+    initialPosition: { x: 150, y: 350 },
+    size: { width: 350, height: 300 },
   },
   {
     id: "welcome_card_3",
     type: CARD_TYPE.LINK,
     body: "https://www.google.com",
-    initialPosition: { x: 500, y: 420 },
+    initialPosition: { x: 550, y: 420 },
+    size: { width: 350, height: 200 },
   },
   {
     id: "welcome_card_4",
     type: CARD_TYPE.TEXT,
     title: "In case you need...",
     body: "to remember the instructions,click the button on the top menu",
-    initialPosition: { x: 500, y: 100 },
+    initialPosition: { x: 550, y: 100 },
+    size: { width: 350, height: 200 },
   },
 ];

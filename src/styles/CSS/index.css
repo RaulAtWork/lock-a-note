@@ -110,8 +110,10 @@ header h1 {
 .card {
   display: flex;
   flex-direction: column;
-  width: 320px;
   position: fixed;
+  width: inherit;
+  height: inherit;
+  overflow: hidden; /* let the resize and content handle the scroll*/
   transform-origin: top left;
   background-color: var(--dark-shade-900);
   border: 2px solid var(--dark-shade-900);
@@ -124,6 +126,10 @@ header h1 {
   z-index: 10;
 }
 
+.react-resizable {
+  position: fixed !important;
+}
+
 .card-title {
   display: flex;
   flex-direction: row;
@@ -134,6 +140,11 @@ header h1 {
   width: 100%;
   padding: var(--separation-s);
   background-color: var(--dark-shade-800);
+  height: 100%;
+  overflow: auto;
+}
+.card-content.link-card {
+  height: auto;
 }
 
 .draggable {
@@ -150,7 +161,7 @@ header h1 {
   opacity: 0;
   flex-direction: row;
   justify-content: end;
-  position: absolute;
+  position: fixed;
   top: -30px;
   right: var(--separation-s);
   transition: opacity 0.4s ease; /* Smooth transition */
@@ -176,6 +187,11 @@ header h1 {
   cursor: pointer;
 }
 
+.card-title input {
+  width: 100%;
+  text-overflow: ellipsis;
+}
+
 /*CARD CHECK LIST*/
 .check-list {
   padding: var(--separation-s);
@@ -197,6 +213,8 @@ header h1 {
 
 .check-task-text {
   flex: 1;
+  min-width: 10ch;
+  text-overflow: ellipsis;
 }
 
 .check-task-delete {
@@ -212,6 +230,15 @@ header h1 {
   pointer-events: all;
 }
 
+/* COLLAPSIBLE */
+.collapsible {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* RESIZE */
 .icon-secondary, .icon-l, .icon {
   width: 20px;
   height: 20px;
@@ -229,6 +256,8 @@ header h1 {
 .link-preview {
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  flex: 1;
 }
 
 .link-preview-title,

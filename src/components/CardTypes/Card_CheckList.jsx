@@ -98,7 +98,7 @@ function Card_CheckList({ body, setBody }) {
     let newBody = body;
     // prevent deleting the last element, we just clean it up
     if (body.length <= 1) {
-      newBody = [{ id: uuidv4(), completed: false, task: "" }]
+      newBody = [{ id: uuidv4(), completed: false, task: "" }];
     } else {
       newBody.splice(index, 1);
       if (preSetAction) preSetAction();
@@ -108,35 +108,37 @@ function Card_CheckList({ body, setBody }) {
   }
 
   return (
-    <ul className="check-list card-content" ref={ulRef}>
-      {body?.map((checkItem, index) => (
-        <li
-          className={`check-task ${checkItem.completed ? "completed" : ""}`}
-          key={checkItem.id}
-        >
-          <input
-            className="check-task-checkbox"
-            type="checkbox"
-            checked={checkItem.completed ? true : false}
-            onChange={(event) => onCheckbox(checkItem.id, event)}
-          />{" "}
-          <input
-            className="check-task-text"
-            type="text"
-            value={checkItem.task}
-            onChange={(event) => onInputText(checkItem.id, event)}
-            placeholder="Enter your task"
-            onKeyDown={(event) => handleOnKeyDown(event, index)}
-          />
-          <button
-            className="check-task-delete"
-            onClick={() => deleteRow(index)}
+    <div className="card-content" >
+      <ul className="check-list" ref={ulRef}>
+        {body?.map((checkItem, index) => (
+          <li
+            className={`check-task ${checkItem.completed ? "completed" : ""}`}
+            key={checkItem.id}
           >
-            <FontAwesomeIcon icon={faX} style={{ pointerEvents: "none" }} />
-          </button>
-        </li>
-      ))}
-    </ul>
+            <input
+              className="check-task-checkbox"
+              type="checkbox"
+              checked={checkItem.completed ? true : false}
+              onChange={(event) => onCheckbox(checkItem.id, event)}
+            />{" "}
+            <input
+              className="check-task-text"
+              type="text"
+              value={checkItem.task}
+              onChange={(event) => onInputText(checkItem.id, event)}
+              placeholder="Enter your task"
+              onKeyDown={(event) => handleOnKeyDown(event, index)}
+            />
+            <button
+              className="check-task-delete"
+              onClick={() => deleteRow(index)}
+            >
+              <FontAwesomeIcon icon={faX} style={{ pointerEvents: "none" }} />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

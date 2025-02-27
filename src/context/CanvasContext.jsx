@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { welcomeCards } from "./WelcomeCards";
+import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 // Create the ZoomContext
 const CanvasContext = createContext();
@@ -68,10 +69,12 @@ export function CanvasProvider({ children }) {
     type,
     initialPosition = { x: 300, y: 300 },
   }) {
+    let size = {width: 250, height: 300}
+
     let newID = uuidv4();
     setCardList([
       ...cardList,
-      { title, body, initialPosition, type, id: newID },
+      { title, body, initialPosition, type, id: newID, size, collapsed: false },
     ]);
   }
 
@@ -113,6 +116,28 @@ export function CanvasProvider({ children }) {
     setCardList(udpatedList);
   }
 
+  function updateCardSize(newSize, id){
+    const udpatedList = cardList.map((card) => {
+      if (card.id === id) {
+        card.size = newSize; //{width, height}
+      }
+      return card;
+    });
+
+    setCardList(udpatedList);
+  }
+
+  function toggleCollapse(id){
+    const udpatedList = cardList.map((card) => {
+      if (card.id === id) {
+        card.collapsed = card.collapsed? !card.collapsed : true; //{width, height}
+      }
+      return card;
+    });
+
+    setCardList(udpatedList);
+  }
+
   return (
     <CanvasContext.Provider
       value={{
@@ -127,6 +152,8 @@ export function CanvasProvider({ children }) {
         updateCardPosition,
         updateCardTitle,
         udpateCardBody,
+        updateCardSize,
+        toggleCollapse
       }}
     >
       {children}

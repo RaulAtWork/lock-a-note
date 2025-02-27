@@ -1,22 +1,16 @@
-import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Collapsible({ title, setTitle, titleStyle, open = true, children }) {
-  const [isOpen, setIsOpen] = useState(open);
-
-  function toggleOpen() {
-    setIsOpen(!isOpen);
-  }
+function Collapsible({ title, setTitle, titleStyle, isOpen = true, children, toggleCollapsible }) {
 
   return (
     <div className="collapsible">
       <h2 className={titleStyle}>
         {!isOpen && (
-          <button onClick={toggleOpen}>
+          <button onClick={toggleCollapsible}>
             <FontAwesomeIcon
               icon={faChevronRight}
               className="icon"
@@ -25,7 +19,7 @@ function Collapsible({ title, setTitle, titleStyle, open = true, children }) {
           </button>
         )}
         {isOpen && (
-          <button onClick={toggleOpen}>
+          <button onClick={toggleCollapsible}>
             <FontAwesomeIcon
               icon={faChevronDown}
               className="icon-secondary"

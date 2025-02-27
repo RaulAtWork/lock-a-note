@@ -7,6 +7,9 @@ import Card_Text from "./CardTypes/Card_Text";
 import { ContextualMenu } from "./ContextualMenu";
 import Card_Link from "./CardTypes/Card_Link";
 import Card_CheckList from "./CardTypes/Card_CheckList";
+import { ResizableBox } from "react-resizable";
+
+import "react-resizable/css/styles.css";
 
 const CARD_TYPE = {
   TEXT: "text",
@@ -14,27 +17,37 @@ const CARD_TYPE = {
   CHECKLIST: "checklist",
 };
 
-function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
+function Card({
+  title,
+  body,
+  type,
+  initialPosition = { x: 300, y: 300 },
+  size,
+  id,
+  isCollapsed,
+}) {
   // State to manage the card's position
   const [position, setPosition] = useState(initialPosition);
-  const [isFocused, setIsFocused] = useState(false);
-  const { removeCardFromCanvas, updateCardTitle, udpateCardBody, updateCardPosition } =
-    useCanvasContext();
+  const [isResizing, setIsResizing] = useState(false);
+  const {
+    removeCardFromCanvas,
+    updateCardTitle,
+    udpateCardBody,
+    updateCardPosition,
+    updateCardSize,
+    toggleCollapse,
+  } = useCanvasContext();
 
   // Give draggable behavior
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
+    disabled: isResizing,
   });
 
-  // Calculate the style by combining the current position and the drag offset
-  /*const dragStyle = {
-    transform: `translate3d(${((transform?.x || 0) + position.x) / zoom}px, ${
-      ((transform?.y || 0) + position.y) / zoom
-    }px, 0)`,
-  };*/
-
   const dragStyle = {
-    transform: `translate(${(transform?.x || 0) + position.x}px, ${(transform?.y || 0) + position.y}px) `,
+    transform: `translate(${(transform?.x || 0) + position.x}px, ${
+      (transform?.y || 0) + position.y
+    }px) `,
   };
 
   // Handle the drag end event to update the position
@@ -47,9 +60,9 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
     }
   };
 
-  useEffect(()=>{
-    updateCardPosition(position, id)
-  }, [position])
+  useEffect(() => {
+    updateCardPosition(position, id);
+  }, [position]);
 
   function onDelete() {
     removeCardFromCanvas(id);
@@ -63,48 +76,68 @@ function Card({ title, body, type, initialPosition = { x: 300, y: 300 }, id }) {
     udpateCardBody(newBody, id);
   }
 
-  function handleFocus() {
-    setIsFocused(true);
+  function handleResizeStart(e) {
+    e.stopPropagation();
+    setIsResizing(true);
+  }
+  function handleResizeStop(e, { size }) {
+    updateCardSize(size, id);
+    setIsResizing(false);
   }
 
-  function handleBlur() {
-    // We need to put a little delay so the buttons can react when on focus
-    setIsFocused(false);
+  function getCardWidth() {
+    return size.width ? size.width : 300;
+  }
+
+  function getCardHeight() {
+    if (isCollapsed) return 52;
+    return size.height ? size.height : 400;
   }
 
   return (
-    <div
-      className="card draggable"
-      ref={setNodeRef}
+    <ResizableBox
+      className="box"
+      width={getCardWidth()}
+      height={getCardHeight()}
       style={dragStyle}
-      {...listeners}
-      {...attributes}
-      onPointerUp={handleDragEnd} // Update position when drag ends
-      onMouseDown={(e) => e.stopPropagation()}
-      id={id}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onResizeStart={handleResizeStart} // Disable dragging
+      onResizeStop={handleResizeStop} // Enable dragging
+      minConstraints={[200, 200]}
+      maxConstraints={[700,700]}
+      axis={isCollapsed ? "none" : "both"}
     >
-      <ContextualMenu onDelete={onDelete} isFocused={isFocused} />
-      {type !== CARD_TYPE.LINK && (
-        <Collapsible
-          title={title}
-          setTitle={updateTitle}
-          titleStyle="card-title"
-        >
-          {type === CARD_TYPE.TEXT && (
-            <Card_Text body={body} setBody={updateBody} />
-          )}
-          {type === CARD_TYPE.CHECKLIST && (
-            <Card_CheckList body={body} setBody={updateBody} />
-          )}
-        </Collapsible>
-      )}
+      <div
+        className="card draggable"
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        onPointerUp={handleDragEnd} // Update position when drag ends
+        onMouseDown={(e) => e.stopPropagation()}
+        id={id}
+      >
+        <ContextualMenu onDelete={onDelete} />
+        {type !== CARD_TYPE.LINK && (
+          <Collapsible
+            title={title}
+            setTitle={updateTitle}
+            titleStyle="card-title"
+            isOpen={!isCollapsed}
+            toggleCollapsible={() => toggleCollapse(id)}
+          >
+            {type === CARD_TYPE.TEXT && (
+              <Card_Text body={body} setBody={updateBody} />
+            )}
+            {type === CARD_TYPE.CHECKLIST && (
+              <Card_CheckList body={body} setBody={updateBody} />
+            )}
+          </Collapsible>
+        )}
 
-      {type === CARD_TYPE.LINK && (
-        <Card_Link body={body} setBody={updateBody} />
-      )}
-    </div>
+        {type === CARD_TYPE.LINK && (
+          <Card_Link body={body} setBody={updateBody} />
+        )}
+      </div>
+    </ResizableBox>
   );
 }
 

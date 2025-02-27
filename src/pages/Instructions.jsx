@@ -31,6 +31,8 @@ function Instructions() {
           </span>
         </li>
       </ul>
+      <br />
+      <p> All Cards can be resized using the bottom-right corner.</p>
 
       <br />
       <h2>Canvas Use</h2>

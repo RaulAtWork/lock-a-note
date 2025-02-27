@@ -2,7 +2,12 @@ import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 const API_KEY = import.meta.env.VITE_JSONLINK_API_KEY;
-const STATE = { IDLE:"idle", LOADING:"loading", PREVIEW:"preview", ERROR:"error" };
+const STATE = {
+  IDLE: "idle",
+  LOADING: "loading",
+  PREVIEW: "preview",
+  ERROR: "error",
+};
 
 function LinkPreview({ url }) {
   const [previewData, setPreviewData] = useState(null);
@@ -14,6 +19,7 @@ function LinkPreview({ url }) {
   }
 
   useEffect(() => {
+    if (!url) return;
     const fetchData = async () => {
       setState(STATE.LOADING);
       try {
@@ -41,25 +47,34 @@ function LinkPreview({ url }) {
           {previewData.images && (
             <img className="link-preview-image" src={previewData.images[0]} />
           )}
-          <h2 className="link-preview-title"><a target="_blank" href={url}>{previewData.title} {" "}<FontAwesomeIcon icon={faArrowUpRightFromSquare} /></a></h2>
+          <h2 className="link-preview-title">
+            <a target="_blank" href={url}>
+              {previewData.title}{" "}
+              <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+            </a>
+          </h2>
           <p className="link-preview-description">{previewData.description}</p>
         </>
       )}
     </div>
   );
 
-  const loadingDisplay = (<p>Fetching resources...</p>)
+  const loadingDisplay = <p className="link-preview">Fetching resources...</p>;
 
-  const errorDisplay = (<p>Url does not exists or does not have preview info.</p>)
+  const errorDisplay = (
+    <p className="link-preview">
+      Url does not exists or does not have preview info.
+    </p>
+  );
 
-
-
-
-  return <>
-  {state === STATE.PREVIEW && previewDisplay}
-  {state === STATE.LOADING && loadingDisplay}
-  {state === STATE.ERROR && errorDisplay}
-  </>;
+  return (
+    <>
+      {state === STATE.PREVIEW && previewDisplay}
+      {state === STATE.LOADING && loadingDisplay}
+      {state === STATE.ERROR && errorDisplay}
+      {state === STATE.IDLE && <div className="link-preview"/>}
+    </>
+  );
 }
 
 export default LinkPreview;

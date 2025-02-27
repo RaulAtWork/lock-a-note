@@ -31,6 +31,8 @@ function App() {
             id={card.id}
             type={card.type}
             initialPosition={card.initialPosition}
+            size={card.size}
+            isCollapsed={card.collapsed}
           />
         ))}
       </Canvas>
